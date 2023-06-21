@@ -1,0 +1,127 @@
+:root {
+    --color1: rgb(255, 0, 38);
+    --color2: #ff4040;
+  }
+body{
+    border: 1px solid black;
+    height:132rem;
+    transition: 0.2s all;
+}
+li{
+    list-style: none;
+    margin: 0px 14px;
+    font-size: 19px;
+}
+ul{
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    margin:8px 20px;
+}
+div , input{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;   
+}
+li:hover , button:hover{
+    cursor: pointer;
+}
+h1{
+    text-align: center;
+    font-size: 42px;
+}
+input{
+    border: none;
+    font-weight: bolder;
+}
+img{
+    width: 100px;
+    height: 100px;
+    border-radius: 1000px;
+    border: 3px solid var(--color2);
+}
+#spinner{
+    width:60px;
+    height:60px;
+    border-bottom: 4px solid var(--color1);
+    border-radius: 1000px;
+    animation: rotate 1s linear;
+}
+#spinner2{
+    width:30px;
+    height:30px;
+    border-bottom: 4px solid var(--color1);
+    border-radius: 1000px;
+    animation: rotate 1s linear;
+    margin-top: -.6rem;
+}
+@keyframes rotate{
+    0%{
+        transform: rotate(0deg);
+    }
+    50%{
+        transform: rotate(180deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+nav{
+    font-weight: bolder;
+    padding: 0px;
+}
+button{
+    color: black;
+    font-weight: bolder;
+    background-color: var(--color2);
+    border: 1px solid black;
+    box-shadow: 2px 3px 2px #183153;
+    border-radius: 3px;
+    font-size: 15px;
+    padding: 2px 7px;
+}
+input{
+    background-color: gray;
+}
+.info{
+    display: flex;
+    flex-direction: row;
+}
+nav{
+    width: 100%;
+    background-color: var(--color2);
+    color: black;
+}
+.custom-toast{
+    background-color: green;
+}
+article{
+    box-shadow: 0px 0px 12px var(--color1);
+}
+form input{
+    background-color: white;
+    border: 1px solid rgb(222, 221, 221);
+    padding: 5px 5px;
+    width: 150%;
+}
+article{
+    width: 90%;
+}
+form div{
+    margin: 4px 0px;
+}
+#logoImg{
+    height: 50px;
+    width:  50px;
+    border: 2px solid black;
+}
+.card1{
+    border: 1px solid black;
+    width: 300px;
+    margin-top: 13px;
+}
+.name{
+    margin: 12px 0px;
+    padding: 0px 12px;
+}
