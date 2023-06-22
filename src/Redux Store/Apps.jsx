@@ -64,7 +64,8 @@ export default function Apps() {
 
     return (
         <>
-            <h1>Cart</h1>
+        <hr />
+            <h1 style={{textDecoration : "underline"}} >Cart</h1>
             <div className="card">
                 {apis.map((e) => (
                     <Card {...e} />

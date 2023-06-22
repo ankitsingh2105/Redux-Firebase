@@ -123,9 +123,10 @@ form div{
 }
 .card1{
     width: 300px;
-    margin-top: 13px;
+    margin-top: 33px;
     box-shadow: 3px 1px 12px var(--color1);
     border-radius: 10px;
+    background-color: #f7fcfb;
 }
 .name{
     margin: 12px 0px;
@@ -135,4 +136,8 @@ small{
     position: relative;
     top: -14px;
     right: 6px;
+}
+hr{
+    margin-top: 3rem;
+    width: 100%;
 }
