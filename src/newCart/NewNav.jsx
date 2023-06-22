@@ -51,9 +51,9 @@ export default function NewNav() {
                             (
                                 <>
 
-                                    <Link className='linking' to="/signin" style={{ color: 'black' }}><li>Sign Up</li></Link>
+                                    <Link className='linking' to="/signin" style={{ color: 'black' }}><li>SignUp</li></Link>
 
-                                    <Link className='linking' to="/login" style={{ color: 'black' }}><li>Log In</li></Link>
+                                    <Link className='linking' to="/login" style={{ color: 'black' }}><li>LogIn</li></Link>
 
                                 </>
                             )
