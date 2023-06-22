@@ -132,9 +132,6 @@ export default function Home() {
                             <button onClick={handleUploading}>Upload New Image</button>
                         </div>
                         <br />
-                        {/* <div>
-                            <button onClick={handleAdding} >Add array of object</button>
-                        </div> */}
                     </>
                     )
             }

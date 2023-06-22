@@ -1,9 +1,9 @@
 :root {
-    --color1: rgb(21, 132, 244);
-    --color2: #40dfff;
+    --color1: rgb(2, 12, 22);
+    --color2: #ff0762;
   }
 body{
-    border: 1px solid black;
+    border: 1px solid rgb(0, 0, 0);
     height:175rem;
     transition: 0.2s all;
 }
@@ -97,7 +97,8 @@ nav{
     background-color: green;
 }
 article{
-    box-shadow: 0px 0px 12px var(--color1);
+    box-shadow: 4px 2px 12px var(--color1);
+    border-radius: 10px;
 }
 form input{
     background-color: white;
@@ -121,9 +122,10 @@ form div{
     margin-left:-14px ;
 }
 .card1{
-    border: 1px solid black;
     width: 300px;
     margin-top: 13px;
+    box-shadow: 3px 1px 12px var(--color1);
+    border-radius: 10px;
 }
 .name{
     margin: 12px 0px;
