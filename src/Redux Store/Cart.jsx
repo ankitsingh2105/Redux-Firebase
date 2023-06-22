@@ -3,67 +3,84 @@ import '../newCart/index.css';
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { initializeApp } from 'firebase/app';
 import firebaseConfig from '../newCart/config';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
-import { useSelector } from 'react-redux';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { useDispatch, useSelector } from 'react-redux';
+import { decrement, replace } from './counterAction';
 export default function Cart() {
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
   const [objArray, setobjArray] = useState([]);
-
+  const user = auth.currentUser;
   const cartMSG = useRef(null);
-
-  const array = useSelector((state) => state.array);
-  useEffect(()=>{
-    console.log("initial renderis -> " , array);
-  },[])
+  const dispatch = useDispatch();
 
 
   useEffect(() => {
-    const user = auth.currentUser;
-    console.log("this is the user -. ", user);
     onAuthStateChanged(auth, async (user) => {
-      console.log("insode insode ", user)
       if (user) {
         cartMSG.current.innerHTML = "<br/><b>Welcome to the cart</b>";
-        console.log("user os veririded");
         const docRef = doc(db, "reduxObj", user.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          console.log("doc is here -> ", docSnap.data().arrayOfObject);
           setobjArray(docSnap.data().arrayOfObject);
+        } else {
+          console.log("sorry!!");
         }
-        else {
-          console.log("shit man");
-        }
-        console.log("insode the eefct in cart this is the state -> ", objArray)
-      } 
-      else {
+      } else {
         cartMSG.current.innerHTML = "<br/><b>Please login to see cart</b>";
-        console.log("No such document!");
       }
     });
-  }, [])
+  }, []);
+
+
+  useEffect(() => {
+    console.log("this siobj-> ", objArray)
+  }, [objArray])
+
+
+  const handleDeletion = (e) => {
+    dispatch(decrement());
+    console.log("this is 0> ", e);
+    const newArray = objArray.filter((e1) => {
+      return e1.name != e;
+    });
+    dispatch(replace(newArray));
+    setobjArray(newArray);
+    const docRef = doc(db, 'reduxObj', user.uid);
+    setDoc(docRef, {
+      arrayOfObject: newArray,
+    });
+    console.table("this is teh table+++  -> ", newArray);
+  }
+
+  const array = useSelector((state) => state.counterReducer.array);
+
+  useEffect(() => {
+    console.log("array is -> ", array);
+  }, [array])
 
   return (
     <>
       <div ref={cartMSG} >This is the cart!!</div>
       {
         objArray.map((e) => {
-          const { city, img, name, standard } = e;
-          console.log("a and b and c is here -> ", city);
+          const { price, img, company, name, id } = e;
           return (
             <React.Fragment key={name}>
               <br />
-              <article style={{padding:"15px 0px"}} >
+              <article style={{ padding: "15px 0px" }} >
                 <div>
                   <img src={img} alt="" />
-                  <div style={{marginTop : "10px"}} className='info'><b>City &nbsp;: &nbsp;</b>{city}</div>
-                  <div style={{marginTop : "10px"}} className='info'><b>Name &nbsp;: &nbsp;</b>{name}</div>
-                  <div style={{marginTop : "10px"}} className='info'><b>Standard &nbsp;: &nbsp;</b>{standard}</div>
+                  <div style={{ marginTop: "10px" }} className='info'><b>Name &nbsp;: &nbsp;</b>{name}</div>
+
+                  <div style={{ marginTop: "10px" }} className='info'><b>Price &nbsp;: &nbsp;</b>${price}</div>
+
+                  <div style={{ marginTop: "10px" }} className='info'><b>Company &nbsp;: &nbsp;</b>{company}</div>
+
                   <br />
-                  <button>Delete</button>
+                  <button onClick={() => handleDeletion(name)} >Delete</button>
                 </div>
               </article>
               <br />

@@ -67,7 +67,7 @@ export default function Home() {
                 await updateProfile(auth.currentUser, { photoURL: url });
                 try {
                     toast.success('Image updated', { autoClose: 1500 });
-                    // window.location.reload();
+                    window.location.reload();
                 }
                 catch (err) {
                     toast.error('Something went wrong', { autoClose: 1500 });
@@ -85,16 +85,6 @@ export default function Home() {
         const photo = e.target.files[0];
         setImage(photo);
     };
-
-    // const createUserCollection = async (user, name) => {
-    //     const docRef = doc(db, 'objUser', user.uid);
-    //     await setDoc(docRef, {
-    //         uid: user.uid,
-    //         email: user.email,
-    //         name: name,
-    //         arrayOfObject: obj
-    //     });
-    // };
 
 
     // todo :i this is the second thing
@@ -119,17 +109,6 @@ export default function Home() {
             toast.error("Please login first-> " , {autoClose:1500})
         }
     }
-
-    // todo : adding shit
-
-    // const handleAdding = async () => {
-    //     onAuthStateChanged(auth, (user) => {
-    //         if (user) {
-    //             createUserCollection(user, user.displayName);
-    //             toast.success("creadted", { autoClose: 1500 });
-    //         }
-    //     });
-    // }
 
     return (
         <>

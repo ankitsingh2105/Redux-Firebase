@@ -4,16 +4,19 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './newCart/Home';
 import Login from './newCart/Login';
-import counterReducer from './Redux Store/counterReducer';
-import { createStore } from 'redux';
+import { counterReducer, Add } from './Redux Store/counterReducer';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux'
 import Apps from './Redux Store/Apps';
 import NewNav from './newCart/NewNav';
 import Cart from './Redux Store/Cart';
 
 const root = createRoot(document.getElementById('root'));
-const store = createStore(counterReducer);
-
+const rootReducer = combineReducers({
+  counterReducer,
+  Add,
+});
+const store = createStore(rootReducer);
 root.render(
   <React.StrictMode>
     <BrowserRouter>

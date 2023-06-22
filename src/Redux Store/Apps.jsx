@@ -1,48 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useEffect , useState } from 'react';
 import apis from './api';
 import '../newCart/index.css';
 import { useSelector, useDispatch } from 'react-redux';
-import addElem from './counterAction';
+import { addElem, increment } from './counterAction';
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { initializeApp } from 'firebase/app';
 import firebaseConfig from '../newCart/config';
-import { getDoc ,getFirestore, doc, setDoc } from 'firebase/firestore';
+import { getDoc, getFirestore, doc, setDoc } from 'firebase/firestore';
 
 export default function Apps() {
-    const array = useSelector((state) => state.array);
+    const array = useSelector((state) => state.counterReducer.array);
     const dispatch = useDispatch();
-
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
     const user = auth.currentUser;
 
-    const handleAddingToCart = async (name, city, standard, img) => {
-        dispatch(addElem({ name, city, standard, img }));
+    const [isDisabled, setIsDisabled] = useState(false);
 
+    const handleAddingToCart = async (name, price, company, img) => {
+        dispatch(addElem({ name, price, company, img }));
+        dispatch(increment());
+        setIsDisabled(true);
     }
 
     function getInfo() {
         let returnArray = ["something went wrong"];
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-            console.log('this is the user -1. ', user);
-            const docRef = doc(db, 'reduxObj', user.uid);
-            const docSnap = await getDoc(docRef);
-            console.log("next lvl-> " , docSnap);
-            if(docSnap.exists()){
-                console.log('inside the redux cart -> ', docSnap.data().arrayOfObject);
-                returnArray= docSnap.data().arrayOfObject;
+                console.log('this is the user -1. ', user);
+                const docRef = doc(db, 'reduxObj', user.uid);
+                const docSnap = await getDoc(docRef);
+                console.log("next lvl-> ", docSnap);
+                if (docSnap.exists()) {
+                    console.log('inside the redux cart -> ', docSnap.data().arrayOfObject);
+                    returnArray = docSnap.data().arrayOfObject;
+                }
+                else {
+                    console.log("nothing exists");
+                    returnArray = [{ name: "Sadhu Singh" }];
+                }
+            } else {
+                console.log('this is the user -2. ', user);
+                console.log('empty cart');
+                returnArray = ["we are offline"];
             }
-            else {
-                console.log("nothing exists");
-                returnArray= [{name : "Sadhu Singh"}];
-            }
-        } else {
-            console.log('this is the user -2. ', user);
-            console.log('empty cart');
-            returnArray = ["we are offline"];
-        }
         })
         return returnArray;
     }
@@ -53,10 +55,10 @@ export default function Apps() {
         if (user) {
             const docRef = doc(db, 'reduxObj', user.uid);
             setDoc(docRef, {
-                arrayOfObject:  array,
+                arrayOfObject: array,
             });
         }
-        console.table("this is teh table  -> " ,array);
+        console.table("this is teh table  -> ", array);
     }, [array]);
 
     return (
@@ -65,7 +67,7 @@ export default function Apps() {
             <h2>Cart</h2>
             <div className="card">
                 {apis.map((e) => {
-                    const { name, city, standard, img , id } = e;
+                    const { name, price, company, img, id } = e;
                     return (
                         <div className="card1" key={id} >
                             <br />
@@ -74,13 +76,13 @@ export default function Apps() {
                                 <b>Name</b> : {name}
                             </p>
                             <p className="name info">
-                                <b>City</b> : {city}
+                                <b>Company</b> : {company}
                             </p>
                             <p className="name info">
-                                <b>Class</b> : {standard}
+                                <b>Price </b> : ${price}
                             </p>
                             <p>
-                                <button onClick={() => handleAddingToCart(name, city, standard, img)}>Add</button>
+                                <button disabled={isDisabled} onClick={() => handleAddingToCart(name, price, company, img)}>Add</button>
                             </p>
                         </div>
                     );

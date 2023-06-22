@@ -8,17 +8,14 @@ import { Link } from 'react-router-dom'
 import firebaseConfig from "./config"
 import { ToastContainer, toast } from 'react-toastify';
 import Logo from "./logo.png";
-import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
 
 export default function NewNav() {
     const [state, setstate] = useState(false)
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const db = getFirestore(app);
 
-    const array = useSelector((state) => state.array);
-
+    let q  = useSelector((state) => state.Add.sum);
 
     const handleLogout = async (e) => {
         await signOut(auth);
@@ -41,43 +38,29 @@ export default function NewNav() {
     }, [auth])
 
 
-    // * handelling cart data -> 
-
-    // const handleCart = async () => {
-    //     console.log("moving to the cart baby");
-    //     const user = auth.currentUser;
-    //     console.log('current user is 1 -> ', user.uid);
-    //     console.log('current user is 2 -> ', user);
-    //     const docRef = doc(db, 'reduxObj', user.uid);
-    //     await setDoc(docRef, {
-    //         arrayOfObject: array
-    //     });
-    // }
-
-
     return (
         <>
             <nav>
                 <ToastContainer position="bottom-left" toastClassName="custom-toast" />
                 <ul>
                     <img id="logoImg" src={Logo} alt="" />
-                    <Link to="/" style={{ color: 'black' }} ><li>Home</li></Link>
-                    <Link to="/cart"  ><li style={{ color: 'black' }}>Cart</li></Link>
+                    <Link className='linking' to="/" style={{ color: 'black' }} ><li>Home</li></Link>
+                    <Link className='linking' to="/cart"  ><li style={{ color: 'black' }}>Cart <small>{q}</small> </li></Link>
                     {
                         state ?
                             (
                                 <>
 
-                                    <Link to="/signin" style={{ color: 'black' }}><li>Sign Up</li></Link>
+                                    <Link className='linking' to="/signin" style={{ color: 'black' }}><li>Sign Up</li></Link>
 
-                                    <Link to="/login" style={{ color: 'black' }}><li>Log In</li></Link>
+                                    <Link className='linking' to="/login" style={{ color: 'black' }}><li>Log In</li></Link>
 
                                 </>
                             )
                             :
                             (
                                 <>
-                                    <li style={{ color: 'black' }} onClick={handleLogout} >Logout</li>
+                                    <li className='linking' style={{ color: 'black' }} onClick={handleLogout} >Logout</li>
                                 </>
                             )
                     }

@@ -1,16 +1,16 @@
 :root {
-    --color1: rgb(255, 0, 38);
-    --color2: #ff4040;
+    --color1: rgb(21, 132, 244);
+    --color2: #40dfff;
   }
 body{
     border: 1px solid black;
-    height:132rem;
+    height:175rem;
     transition: 0.2s all;
 }
 li{
     list-style: none;
-    margin: 0px 11px;
-    font-size: 19px;
+    margin: 0px 9px;
+    font-size: 18px;
 }
 ul{
     display: flex;
@@ -111,6 +111,9 @@ article{
 form div{
     margin: 4px 0px;
 }
+.linking{
+    text-decoration: none;
+}
 #logoImg{
     height: 50px;
     width:  50px;
@@ -125,4 +128,9 @@ form div{
 .name{
     margin: 12px 0px;
     padding: 0px 12px;
+}
+small{
+    position: relative;
+    top: -14px;
+    right: 6px;
 }
