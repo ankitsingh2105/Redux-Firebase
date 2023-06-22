@@ -67,7 +67,7 @@ export default function Home() {
                 await updateProfile(auth.currentUser, { photoURL: url });
                 try {
                     toast.success('Image updated', { autoClose: 1500 });
-                    window.location.reload();
+                    // window.location.reload();
                 }
                 catch (err) {
                     toast.error('Something went wrong', { autoClose: 1500 });
@@ -86,15 +86,15 @@ export default function Home() {
         setImage(photo);
     };
 
-    const createUserCollection = async (user, name) => {
-        const docRef = doc(db, 'objUser', user.uid);
-        await setDoc(docRef, {
-            uid: user.uid,
-            email: user.email,
-            name: name,
-            arrayOfObject: obj
-        });
-    };
+    // const createUserCollection = async (user, name) => {
+    //     const docRef = doc(db, 'objUser', user.uid);
+    //     await setDoc(docRef, {
+    //         uid: user.uid,
+    //         email: user.email,
+    //         name: name,
+    //         arrayOfObject: obj
+    //     });
+    // };
 
 
     // todo :i this is the second thing
@@ -122,14 +122,14 @@ export default function Home() {
 
     // todo : adding shit
 
-    const handleAdding = async () => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                createUserCollection(user, user.displayName);
-                toast.success("creadted", { autoClose: 1500 });
-            }
-        });
-    }
+    // const handleAdding = async () => {
+    //     onAuthStateChanged(auth, (user) => {
+    //         if (user) {
+    //             createUserCollection(user, user.displayName);
+    //             toast.success("creadted", { autoClose: 1500 });
+    //         }
+    //     });
+    // }
 
     return (
         <>
@@ -153,9 +153,9 @@ export default function Home() {
                             <button onClick={handleUploading}>Upload New Image</button>
                         </div>
                         <br />
-                        <div>
+                        {/* <div>
                             <button onClick={handleAdding} >Add array of object</button>
-                        </div>
+                        </div> */}
                     </>
                     )
             }

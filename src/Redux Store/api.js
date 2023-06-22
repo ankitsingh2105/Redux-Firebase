@@ -7,25 +7,29 @@ const apis = [
         name : "Ankit Singh Chauhan",
         city: "Haldwani",
         standard : "12th",
-        img : logo
+        img : logo,
+        id :1
     },
     {
         name : "Gaurav Rawat",
         city: "Chandigarh",
         standard : "12th",
-        img : mainimag
+        img : mainimag,
+        id :2
     },
     {
         name : "Menika Karki",
         city : "Delhi",
         standard : "12th",
-        img : pic1
+        img : pic1,
+        id :3
     },
     {
         name : "Ashish Bora",
         city : "Tokyo",
         standard : "12th",
-        img : pic2
+        img : pic2,
+        id :4
     }
 ]
 

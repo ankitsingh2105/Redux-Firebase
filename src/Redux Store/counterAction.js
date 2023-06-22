@@ -7,5 +7,4 @@ const addElem = (obj) =>{
         payload : obj,
     }
 }
-
 export default addElem;
