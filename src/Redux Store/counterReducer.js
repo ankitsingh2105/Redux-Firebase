@@ -43,7 +43,6 @@ async function initializeState() {
   const addingState = {
     sum: info.length
   };
-  console.log("the length -> ", info.length);
 
   return {
     initialState,
