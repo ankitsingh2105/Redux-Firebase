@@ -80,6 +80,9 @@ export default function FirebaseForm() {
 
   return (
     <>
+      <br />
+      <br />
+      <br />
       <h1>स्वागत है!</h1>
       {
         loading ? (<h1 id="spinner2"></h1>) : (

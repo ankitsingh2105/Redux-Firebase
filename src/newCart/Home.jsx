@@ -118,6 +118,9 @@ export default function Home() {
                     (<>
                         <div>
                             <br />
+                            <br />
+                            <br />
+                            <br />
                             <h1>Welcome <br /> {name}👋</h1>
                             <img src={newDummy} alt="" />
                             <div><b>Picture</b></div>

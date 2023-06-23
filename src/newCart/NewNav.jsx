@@ -40,7 +40,7 @@ export default function NewNav() {
 
     return (
         <>
-            <nav>
+            <nav class="Navabar" >
                 <ToastContainer position="bottom-left" toastClassName="custom-toast" />
                 <ul>
                     <img id="logoImg" src={Logo} alt="" />

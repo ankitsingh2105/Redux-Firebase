@@ -63,6 +63,9 @@ export default function Cart() {
 
   return (
     <>
+      <br />
+      <br />
+      <br />
       <div ref={cartMSG} >This is the cart!!</div>
       {
         objArray.map((e) => {
