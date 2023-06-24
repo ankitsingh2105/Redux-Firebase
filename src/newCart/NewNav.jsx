@@ -19,17 +19,18 @@ export default function NewNav() {
 
     const handleLogout = async (e) => {
         await signOut(auth);
-        toast.success("Signed Out", { autoClose: 1500 });
+        setstate(false)
+        toast.success("Logging Out", { autoClose: 1500 });
         setTimeout(() => {
             window.location.reload();
-        }, 1800);
+        }, 1500);
     }
 
     useEffect(() => {
         // Todo : always wrap onAuthStateChanged in useEffect, otherwise it can cause infinite re-renders
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                setstate(false)
+
             } else {
                 setstate(true)
             }
@@ -40,7 +41,7 @@ export default function NewNav() {
 
     return (
         <>
-            <nav class="Navabar" >
+            <nav className="Navabar" >
                 <ToastContainer position="bottom-left" toastClassName="custom-toast" />
                 <ul>
                     <img id="logoImg" src={Logo} alt="" />

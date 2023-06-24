@@ -2,10 +2,10 @@ import React, { useRef, useState, useEffect } from 'react';
 import { onAuthStateChanged, getAuth, updateProfile } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import firebaseConfig from './config';
-import dummy from './dummyimageFirebase.png';
+import dummy from '../assets/dummyimageFirebase.png';
 
 const app = initializeApp(firebaseConfig);
 export default function Home() {
@@ -93,11 +93,11 @@ export default function Home() {
         const user = auth.currentUser;
         const docRef = doc(db, "objUser", user.uid);
         const docSnap = await getDoc(docRef);
-        if(user){
-            let objArray =  docSnap.data().arrayOfObject;
+        if (user) {
+            let objArray = docSnap.data().arrayOfObject;
             let tempHTML = ""
             objArray.forEach((e) => {
-                tempHTML+=
+                tempHTML +=
                     `
                 <div className="info"><b>Name : ${e.name} </b></div>
                 <div className="info"><b>Class : ${e.class} </b></div>
@@ -105,8 +105,8 @@ export default function Home() {
             })
             arrayStore.current.innerHTML = tempHTML
         }
-        else{
-            toast.error("Please login first-> " , {autoClose:1500})
+        else {
+            toast.error("Please login first-> ", { autoClose: 1500 })
         }
     }
 

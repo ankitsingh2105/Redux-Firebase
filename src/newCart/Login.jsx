@@ -12,10 +12,12 @@ export default function Login() {
         const password = e.target.password.value;
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            toast.success("Login successful", { autoClose: 1500 });
+            toast.success("Logging in", { autoClose: 1500 });
             e.target.email.value = "";
             e.target.password.value = "";
-            window.location.href = "/";
+            setInterval(() => {
+                window.location.href = "/";
+            }, 1000);
         } catch (error) {
             toast.error("Invalid Credentials", { autoClose: 1500 });
         }
@@ -24,31 +26,31 @@ export default function Login() {
     const createUserCollection = async (user) => {
         const docRef = doc(db, 'newUser', user.uid);
         await setDoc(docRef, {
-          uid: user.uid,
-          email: user.email,
-          name: user.displayName,
+            uid: user.uid,
+            email: user.email,
+            name: user.displayName,
         });
-      };
+    };
 
     const handleGoogleLogin = async () => {
         const provider = new GoogleAuthProvider();
         try {
-        const signgoogle = await signInWithPopup(auth, provider)
-          createUserCollection(signgoogle.user);
-          toast.success("Google Authentication Successful", { autoClose: 1500 });
-          window.location.href = "/";
+            const signgoogle = await signInWithPopup(auth, provider)
+            window.location.href = "/";
+            createUserCollection(signgoogle.user);
+            toast.success("Google Authentication Successful", { autoClose: 1500 });
         }
         catch (err) {
-          toast.error("Somethign went wrong", { autoClose: 1500 });
+            toast.error("Somethign went wrong", { autoClose: 1500 });
         }
-      }
+    }
 
 
     return (
         <>
-        <br />
-        <br />
-        <br />
+            <br />
+            <br />
+            <br />
             <h1>स्वागत है!</h1>
             <article>
 
@@ -72,8 +74,8 @@ export default function Login() {
             <h3>OR</h3>
             <br />
             <article>
-                <div style={{padding : "1rem 0rem"}} >
-                <button onClick={handleGoogleLogin}>Login with google</button>
+                <div style={{ padding: "1rem 0rem" }} >
+                    <button onClick={handleGoogleLogin}>Login with google</button>
                 </div>
             </article>
         </>

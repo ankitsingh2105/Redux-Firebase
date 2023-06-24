@@ -8,12 +8,12 @@ import { initializeApp } from 'firebase/app';
 import firebaseConfig from '../newCart/config';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 
-const Card = ({ name, price, company, img, id }) => {
+const Card = ({ name, price, company, img, quantity , id }) => {
     const dispatch = useDispatch();
     const [buttonState, setButtonState] = useState({ isDisabled: false, label: 'Add' });
 
     const handleAddingToCart = () => {
-        dispatch(addElem({ name, price, company, img }));
+        dispatch(addElem({ name, price, company, img , quantity , id }));
         dispatch(increment());
         setButtonState({ isDisabled: true, label: 'Added to Cart' });
     };

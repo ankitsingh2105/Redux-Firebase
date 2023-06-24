@@ -69,7 +69,7 @@ export default function Cart() {
       <div ref={cartMSG} >This is the cart!!</div>
       {
         objArray.map((e) => {
-          const { price, img, company, name, id } = e;
+          const { price, img, company, name, quantity } = e;
           return (
             <React.Fragment key={name}>
               <br />
@@ -81,6 +81,8 @@ export default function Cart() {
                   <div style={{ marginTop: "10px" }} className='info'><b>Price &nbsp;: &nbsp;</b>${price}</div>
 
                   <div style={{ marginTop: "10px" }} className='info'><b>Company &nbsp;: &nbsp;</b>{company}</div>
+
+                  {/* <div style={{ marginTop: "10px" }} className='info'><b>Quantity : </b> &nbsp; &nbsp; <button className="setQuantity">-</button> &nbsp;&nbsp; {quantity} &nbsp;&nbsp; <button className="setQuantity">+</button></div> */}
 
                   <br />
                   <button onClick={() => handleDeletion(name)} >Delete</button>
