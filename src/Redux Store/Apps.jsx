@@ -8,23 +8,23 @@ import { initializeApp } from 'firebase/app';
 import firebaseConfig from '../newCart/config';
 import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 const Card = ({ name, price, company, img, quantity, id }) => {
     const dispatch = useDispatch();
 
     const handleAddingToCart = async (id) => {
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
         const user = auth.currentUser;
-        const docRef = doc(db, "reduxObj", user.uid);
-        const docSnap = await getDoc(docRef);
         if (user) {
+            const docRef = doc(db, "reduxObj", user.uid);
+            const docSnap = await getDoc(docRef);
             let objArray = docSnap.data().arrayOfObject;
             const exists = objArray.filter((e) => {
                 return e.id === id;
             })
-            if (exists.length===0) {
+            if (exists.length === 0) {
                 dispatch(addElem({ name, price, company, img, quantity, id }));
                 dispatch(increment());
             }
@@ -33,7 +33,7 @@ const Card = ({ name, price, company, img, quantity, id }) => {
             }
         }
         else {
-            toast("Please login to see cart", { autoClose: 500 });
+            toast("Please login add items", { autoClose: 500 });
         }
     };
 
@@ -62,9 +62,6 @@ const Card = ({ name, price, company, img, quantity, id }) => {
 
 export default function Apps() {
     const array = useSelector((state) => state.counterReducer.array);
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
     const user = auth.currentUser;
 
     useEffect(() => {
