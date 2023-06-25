@@ -24,7 +24,7 @@ const Card = ({ name, price, company, img, quantity, id }) => {
             const exists = objArray.filter((e) => {
                 return e.id === id;
             })
-            if (!exists) {
+            if (exists.length===0) {
                 dispatch(addElem({ name, price, company, img, quantity, id }));
                 dispatch(increment());
             }
