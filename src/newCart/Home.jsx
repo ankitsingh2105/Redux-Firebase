@@ -87,7 +87,7 @@ export default function Home() {
     };
 
 
-    // todo :i this is the second thing
+    // todo : getting collection in firebase 
 
     const getCollection = async () => {
         const user = auth.currentUser;

@@ -6,39 +6,56 @@ import { addElem, increment } from './counterAction';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import firebaseConfig from '../newCart/config';
-import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
-const Card = ({ name, price, company, img, quantity , id }) => {
+const Card = ({ name, price, company, img, quantity, id }) => {
     const dispatch = useDispatch();
-    const [buttonState, setButtonState] = useState({ isDisabled: false, label: 'Add' });
 
-    const handleAddingToCart = () => {
-        dispatch(addElem({ name, price, company, img , quantity , id }));
-        dispatch(increment());
-        setButtonState({ isDisabled: true, label: 'Added to Cart' });
+    const handleAddingToCart = async (id) => {
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const user = auth.currentUser;
+        const docRef = doc(db, "reduxObj", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (user) {
+            let objArray = docSnap.data().arrayOfObject;
+            const exists = objArray.filter((e) => {
+                return e.id === id;
+            })
+            if (!exists) {
+                dispatch(addElem({ name, price, company, img, quantity, id }));
+                dispatch(increment());
+            }
+            else {
+                toast("Already added to cart", { autoClose: 500 });
+            }
+        }
+        else {
+            toast("Please login to see cart", { autoClose: 500 });
+        }
     };
 
     return (
         <div className="card1" key={id}>
+
             <br />
             <img src={img} alt="" />
-            <p className="name info">
+            <div className="name info">
                 <b>Name</b> : {name}
-            </p>
-            <p className="name info">
+            </div>
+            <div className="name info">
                 <b>Company</b> : {company}
-            </p>
-            <p className="name info">
+            </div>
+            <div className="name info">
                 <b>Price </b> : ${price}
-            </p>
-            <p>
-                <button
-                    disabled={buttonState.isDisabled}
-                    onClick={handleAddingToCart}
-                >
-                    {buttonState.label}
-                </button>
-            </p>
+            </div>
+            <div>
+                <button onClick={() => handleAddingToCart(id)}> Add to Cart </button>
+            </div>
+            <br />
+
         </div>
     );
 };
@@ -59,16 +76,15 @@ export default function Apps() {
                 arrayOfObject: array,
             });
         }
-        console.table('this is the table  -> ', array);
     }, [array]);
 
     return (
         <>
-        <hr />
-            <h1 style={{textDecoration : "underline"}} >Cart</h1>
+            <hr />
+            <h1 style={{ textDecoration: "underline" }} >Cart</h1>
             <div className="card">
                 {apis.map((e) => (
-                    <Card {...e} />
+                    <Card key={e.id} {...e} />
                 ))}
             </div>
         </>
