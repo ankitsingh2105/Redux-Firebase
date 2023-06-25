@@ -61,12 +61,12 @@ export default function Home() {
             );
 
             try {
+                toast('Uploading started', { autoClose: 1500 });
                 await uploadBytes(storageRef, uploadedImage);
                 const url = await getDownloadURL(storageRef);
 
                 await updateProfile(auth.currentUser, { photoURL: url });
                 try {
-                    toast.success('Image updated', { autoClose: 1500 });
                     window.location.reload();
                 }
                 catch (err) {
@@ -77,7 +77,7 @@ export default function Home() {
             }
         }
         else {
-            toast.error("No image selected", { autoClose: 1500 });
+            toast("Please choose image", { autoClose: 1500 });
         }
     };
 
@@ -123,13 +123,12 @@ export default function Home() {
                             <br />
                             <h1>Welcome <br /> {name}👋</h1>
                             <img src={newDummy} alt="" />
-                            <div><b>Picture</b></div>
                             <div id="info" ref={infoCenter}></div>
                         </div>
                         <div>
                             <div>
                                 <br />
-                                <input type="file" accept="image/*" onChange={handleImageChanges} />
+                                <input placeholder='' type="file" accept="image/*" onChange={handleImageChanges} />
                             </div>
                             <br />
                             <button onClick={handleUploading}>Upload New Image</button>
