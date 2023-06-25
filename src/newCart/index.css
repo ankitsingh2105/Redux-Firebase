@@ -7,6 +7,8 @@ body{
     border-bottom: none;
     /* height:190rem; */
     transition: 0.2s all;
+    background-color: black;
+    color: white;
 }
 li{
     list-style: none;

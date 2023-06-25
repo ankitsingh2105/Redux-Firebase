@@ -4,7 +4,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { initializeApp } from 'firebase/app';
 import firebaseConfig from '../newCart/config';
 import { getFirestore, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { decrement, replace } from './counterAction';
 
 export default function Cart() {
@@ -25,7 +25,7 @@ export default function Cart() {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           setobjArray(docSnap.data().arrayOfObject);
-        } 
+        }
       } else {
         cartMSG.current.innerHTML = "<br/><b>Please login to see cart</b>";
       }
@@ -46,7 +46,8 @@ export default function Cart() {
         } else if (number >= 2) {
           objArray[objIndex].quantity--;
         }
-        // * shallo copying here, otherwise the result wont reflect on ui- 
+
+        // * shallow copying here, otherwise the result wont reflect on ui- 
         // ! reconciliation
 
         const updatedQuantityMap = { ...quantityMap };
