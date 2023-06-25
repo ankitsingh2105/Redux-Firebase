@@ -86,7 +86,7 @@ export default function Apps() {
             </div>
             <br />
             <br />
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3476.260993227752!2d79.45162837477577!3d29.391920175258626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a0a19b0a2abd35%3A0xd41a2dd8bc103ee5!2sNainital%2C%20uttarakhand!5e0!3m2!1sen!2sin!4v1687703072598!5m2!1sen!2sin" width="350" height="350" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe aria-label="goolge map section" title="google map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3476.260993227752!2d79.45162837477577!3d29.391920175258626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a0a19b0a2abd35%3A0xd41a2dd8bc103ee5!2sNainital%2C%20uttarakhand!5e0!3m2!1sen!2sin!4v1687703072598!5m2!1sen!2sin" width="350" height="350" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <br /><br />
         </>
     );

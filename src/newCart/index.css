@@ -5,15 +5,13 @@
 body{
     border: 1px solid rgb(0, 0, 0);
     border-bottom: none;
-    /* height:190rem; */
     transition: 0.2s all;
-    /* background-color: black;
-    color: white; */
 }
 li{
     list-style: none;
     margin: 0px 7px;
     font-size: 18px;
+    color: black;
 }
 ul{
     display: flex;
@@ -117,6 +115,7 @@ form div{
 }
 .linking{
     text-decoration: none;
+    color: black;
 }
 #logoImg{
     height: 50px;
@@ -147,6 +146,4 @@ hr{
 nav{
     position: fixed;
     top: 0px;
-}
-.setQuantity{
 }

@@ -15,7 +15,7 @@ export default function NewNav() {
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    let q  = useSelector((state) => state.Add.sum);
+    let q = useSelector((state) => state.Add.sum);
 
     const handleLogout = async (e) => {
         await signOut(auth);
@@ -44,24 +44,24 @@ export default function NewNav() {
             <nav className="Navabar" >
                 <ToastContainer position="bottom-left" toastClassName="custom-toast" />
                 <ul>
-                    <img id="logoImg" src={Logo} alt="" />
-                    <Link className='linking' to="/" style={{ color: 'black' }} ><li>Home</li></Link>
-                    <Link className='linking' to="/cart"  ><li style={{ color: 'black' }}>Cart <small>{q}</small> </li></Link>
+                    <li><img id="logoImg" src={Logo} alt="" /></li>
+                    <li><Link className='linking' to="/" >Home</Link></li>
+                    <li><Link className='linking' to="/cart">Cart <small>{q}</small></Link></li>
                     {
                         state ?
                             (
                                 <>
 
-                                    <Link className='linking' to="/signin" style={{ color: 'black' }}><li>SignUp</li></Link>
+                                    <li><Link className='linking' to="/signin" >SignUp</Link></li>
 
-                                    <Link className='linking' to="/login" style={{ color: 'black' }}><li>LogIn</li></Link>
+                                    <li><Link className='linking' to="/login">LogIn</Link></li>
 
                                 </>
                             )
                             :
                             (
                                 <>
-                                    <li className='linking' style={{ color: 'black' }} onClick={handleLogout} >Logout</li>
+                                    <li className='linking' onClick={handleLogout} >Logout</li>
                                 </>
                             )
                     }

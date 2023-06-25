@@ -128,7 +128,10 @@ export default function Home() {
                         <div>
                             <div>
                                 <br />
-                                <input placeholder='' type="file" accept="image/*" onChange={handleImageChanges} />
+                                <label for="imageInput"><b>Select an image to upload </b></label>
+                                <br />
+                                <input id="imageInput" placeholder='' type="file" accept="image/*" onChange={handleImageChanges} />
+
                             </div>
                             <br />
                             <button onClick={handleUploading}>Upload New Image</button>
