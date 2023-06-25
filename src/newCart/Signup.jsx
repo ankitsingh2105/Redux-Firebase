@@ -6,7 +6,7 @@ import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import firebaseConfig from "./config";
-import dummy from '../assets/dummyimageFirebase.png';
+import dummy from '../assets/dummyimageFirebase.webp';
 export default function Signup() {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);

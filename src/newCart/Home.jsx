@@ -5,7 +5,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import firebaseConfig from './config';
-import dummy from '../assets/dummyimageFirebase.png';
+import dummy from '../assets/dummyimageFirebase.webp';
 
 const app = initializeApp(firebaseConfig);
 export default function Home() {

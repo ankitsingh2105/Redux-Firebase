@@ -1,9 +1,8 @@
-import shoe1 from "../assets/shoe1.png"
-import shoe2 from "../assets/shoe2.png"
-import shoe3 from "../assets/shoe3.png"
-import shoe4 from "../assets/shoe4.png"
-import shoe5 from "../assets/shoe5.png"
-import shoe6 from "../assets/shoe6.png"
+import shoe1 from "../assets/shoe1.webp"
+import shoe2 from "../assets/shoe2.webp"
+import shoe3 from "../assets/shoe3.webp"
+import shoe4 from "../assets/shoe4.webp"
+import shoe5 from "../assets/shoe5.webp"
 const apis = [
     {
         name : "Nike Air Max",
@@ -45,14 +44,6 @@ const apis = [
         quantity : 1,
         id :5
     },
-    {
-        name : "Puma Suede Classic",
-        company : "Puma",
-        price : "8989",
-        img : shoe6,
-        quantity : 1,
-        id :6
-    }
 ]
 
 export default apis
