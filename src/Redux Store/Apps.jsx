@@ -33,7 +33,7 @@ const Card = ({ name, price, company, img, quantity, id }) => {
             }
         }
         else {
-            toast("Please login add items", { autoClose: 500 });
+            toast("Please login to add items", { autoClose: 500 });
         }
     };
 
