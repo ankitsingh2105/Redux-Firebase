@@ -16,6 +16,7 @@ export default function Cart() {
   const cartMSG = useRef(null);
   const dispatch = useDispatch();
   const [quantityMap, setQuantityMap] = useState({});
+  const [amount, setamount] = useState(0)
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -26,6 +27,13 @@ export default function Cart() {
         if (docSnap.exists()) {
           setobjArray(docSnap.data().arrayOfObject);
         }
+        let tempArray = docSnap.data().arrayOfObject;
+        let tempAmount = 0;
+        tempArray.forEach((e) => {
+          const { price, quantity } = e;
+          tempAmount += price * quantity;
+        })
+        setamount(tempAmount);
       } else {
         cartMSG.current.innerHTML = "<br/><b>Please login to see cart</b>";
       }
@@ -47,9 +55,10 @@ export default function Cart() {
           objArray[objIndex].quantity--;
         }
 
+        
         // * shallow copying here, otherwise the result wont reflect on ui- 
         // ! reconciliation
-
+        
         const updatedQuantityMap = { ...quantityMap };
         updatedQuantityMap[id] = objArray[objIndex].quantity;
         setQuantityMap(updatedQuantityMap);
@@ -62,6 +71,13 @@ export default function Cart() {
         });
 
         await updateDoc(docRef, { arrayOfObject: updatedArray });
+        let tempAmount = 0;
+        objArray.forEach((e) => {
+          const { price, quantity } = e;
+          tempAmount += price * quantity;
+        })
+        console.log("this is inside the function ->", tempAmount)
+        setamount(tempAmount);
 
       }
     }
@@ -70,6 +86,10 @@ export default function Cart() {
   const handlequantity = (id, string) => {
     getCollection(id, string);
   }
+
+  useEffect(() => {
+    console.log("this is the amount i need -> ", amount);
+  }, [amount])
 
   const handleDeletion = (e) => {
     dispatch(decrement());
@@ -120,6 +140,14 @@ export default function Cart() {
           )
         })
       }
+      <br />
+      <article>
+        <div className="priceSection">
+          <h2>Price Section</h2>
+          <h3>Total amount ${amount}</h3>
+        </div>
+      </article>
+      <br />
 
     </>
   )

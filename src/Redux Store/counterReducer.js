@@ -9,7 +9,6 @@ const db = getFirestore(app);
 
 async function getInfo() {
   try {
-    let returnArray = ["something went wrong bitch"];
     const user = await new Promise((resolve, reject) => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
         unsubscribe();
@@ -21,7 +20,7 @@ async function getInfo() {
       const docRef = doc(db, 'reduxObj', user.uid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        returnArray = docSnap.data().arrayOfObject;
+        let returnArray = docSnap.data().arrayOfObject;
         return returnArray;
       } else {
         return [];
