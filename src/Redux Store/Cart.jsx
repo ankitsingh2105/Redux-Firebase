@@ -16,7 +16,8 @@ export default function Cart() {
   const cartMSG = useRef(null);
   const dispatch = useDispatch();
   const [quantityMap, setQuantityMap] = useState({});
-  const [amount, setamount] = useState(0)
+  const [amount, setamount] = useState(0);
+  const [tempAmount, settempAmount] = useState({});
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -91,7 +92,11 @@ export default function Cart() {
     console.log("this is the amount i need -> ", amount);
   }, [amount])
 
-  const handleDeletion = (e) => {
+  const handleDeletion = (e , b ,c) => {
+    setamount((e)=>{
+      return e- b* quantityMap[c];
+    })
+    console.log(e , b , c);
     dispatch(decrement());
     const newArray = objArray.filter((e1) => {
       return e1.name != e;
@@ -111,7 +116,7 @@ export default function Cart() {
       <div ref={cartMSG}>This is the cart!!</div>
       {
         objArray.map((e) => {
-          const { price, img, company, name, id } = e;
+          const { price, img, company, name, id ,  } = e;
           const quantity = quantityMap[id] || e.quantity;
 
           return (
@@ -132,7 +137,7 @@ export default function Cart() {
                     <button onClick={() => handlequantity(id, "add")} className="setQuantity">+</button>
                   </div>
                   <br />
-                  <button onClick={() => handleDeletion(name)}>Delete</button>
+                  <button onClick={() => handleDeletion(name , price , id)}>Delete</button>
                 </div>
               </article>
               <br />
